@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Preparation') {
             steps {
-                echo 'Hello, pipeline'
+                echo 'Hello, pipeline1'
                 checkout([$class: 'GitSCM', branches: [[name: "*/master"]], 
                 userRemoteConfigs: [[credentialsId: "hule1", url: "https://github.com/huleTW/pipeline-exercise.git/"]]])
 
