@@ -1,0 +1,23 @@
+pipeline {
+
+    triggers {
+        pollSCM('* * * * *')
+    }
+
+    stages {
+        stage('Preparation') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: "*/master"]], 
+                userRemoteConfigs: [[credentialsId: "hule1", url: "https://github.com/huleTW/pipeline-exercise.git/"]]])
+
+                sh """git submodule update --recursive --remote"""
+            }
+        }
+       
+        stage('Build') {
+            steps {
+                sh './gradlew clean build'
+            }
+        }
+    }
+}
